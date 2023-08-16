@@ -15,11 +15,13 @@ app.set('views', './views');
 app.use(express.static('public'));
 
 const middleware2 = (req, res, next) => {
-    const today = new Date().getDate();
-    const start = 15;
+    const today = new Date();
+    const start = 9;
     const end = 17;
 
-    if (today >= start && today <= end) {
+    const weekday = today.getDay();
+
+    if (today >= start && today <= end && weekday!= 1 && weekday!=6) {
         next();
     } else {
         res.send('The site is currently unavailable. Please try again at a different day.');
